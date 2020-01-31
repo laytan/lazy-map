@@ -15,7 +15,7 @@ function lazyMapLoadGoogle() {
 function lazyMapInitMap() {
 	const mapEl = document.querySelector('#map');
 	const { lat, lng, marker, markerCustom, markerTooltip, markerZoom } = mapEl.dataset;
-	console.log(lat, lng, marker, markerCustom, markerTooltip, markerZoom);
+	
 	const center = {
 		lat: Number(lat), lng: Number(lng)
 	};
@@ -29,7 +29,6 @@ function lazyMapInitMap() {
 		if(markerCustom !== "false") {
 			const icon = {
 				url: markerCustom,
-				scaledSize: new google.maps.Size(40, 40), // scaled size
 				origin: new google.maps.Point(0, 0), // origin
 				anchor: new google.maps.Point(0, 0) // anchor
 			};
@@ -58,7 +57,7 @@ function lazyMapSetUpMap() {
 	if ('IntersectionObserver' in window) {
 		const observeOpts = {
 			threshold: 0,
-			rootMargin: '400px',
+			rootMargin: '0px',
 		};
 	
 		const observer = new IntersectionObserver((entries) => {

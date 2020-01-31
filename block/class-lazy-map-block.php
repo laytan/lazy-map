@@ -56,7 +56,6 @@ class Lazy_Map_Block {
 	 */
 	public function init() {
 		$asset_file = include( plugin_dir_path( __FILE__ ) . 'dist/lazy-map-block.asset.php' );
-		var_dump( plugins_url( 'dist/lazy-map-block.js', __FILE__ ) );
 		wp_register_script(
 			'lazy-map-block',
 			plugins_url( 'dist/lazy-map-block.js', __FILE__ ),

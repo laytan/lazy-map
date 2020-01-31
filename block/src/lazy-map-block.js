@@ -1,7 +1,7 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 import { InspectorControls, MediaUpload } from '@wordpress/editor';
-import { PanelBody, TextControl, ToggleControl } from '@wordpress/components';
+import { PanelBody, TextControl, ToggleControl, Button, RangeControl, Text } from '@wordpress/components';
 
 registerBlockType( 'lazy-map/lazy-map-block', {
     title: __('Lazy map', 'lazy-map'),
@@ -27,13 +27,13 @@ registerBlockType( 'lazy-map/lazy-map-block', {
             attribute: 'data-key',
         },
         lat: {
-            type: 'number',
+            type: 'string',
             source: 'attribute',
             selector: '#map',
             attribute: 'data-lat',
         },
         lng: {
-            type: 'number',
+            type: 'string',
             source: 'attribute',
             selector: '#map',
             attribute: 'data-lng',
@@ -49,6 +49,7 @@ registerBlockType( 'lazy-map/lazy-map-block', {
             source: 'attribute',
             selector: '#map',
             attribute: 'data-marker-custom',
+            default: 'false',
         },
         markerTooltip: {
             type: 'string',
@@ -61,6 +62,7 @@ registerBlockType( 'lazy-map/lazy-map-block', {
             source: 'attribute',
             selector: '#map',
             attribute: 'data-marker-zoom',
+            default: 10,
         },
     },
     edit({ attributes, setAttributes }) {
@@ -74,11 +76,6 @@ registerBlockType( 'lazy-map/lazy-map-block', {
                     onChange={ ( key ) => setAttributes( { key } ) }
                 />
                 <TextControl
-                    label={ __('Marker tooltip', 'lazy-map') }
-                    value={ markerTooltip }
-                    onChange={ ( markerTooltip ) => setAttributes( { markerTooltip } ) }
-                />
-                <TextControl
                     label={ __('Marker/Center latitude', 'lazy-map') }
                     type="number"
                     value={ lat }
@@ -90,11 +87,12 @@ registerBlockType( 'lazy-map/lazy-map-block', {
                     value={ lng }
                     onChange={ ( lng ) => setAttributes( { lng } ) }
                 />
-                <TextControl
-                    label={ __('Starting zoom', 'lazy-map') }
-                    type="number"
+                <RangeControl
+                    label={ __('Starting zoom level', 'lazy-map') }
                     value={ markerZoom }
                     onChange={ ( markerZoom ) => setAttributes( { markerZoom } ) }
+                    min={ 0 }
+                    max={ 19 }
                 />
                 <ToggleControl
                     label={ __('Show a marker?', 'lazy-map') }
@@ -102,17 +100,38 @@ registerBlockType( 'lazy-map/lazy-map-block', {
                     checked={ marker }
                     onChange={ () => setAttributes( { marker: !marker } ) }
                 />
-                <MediaUpload 
-                    onSelect={ ( value ) => setAttributes( { markerCustom: value.sizes.full.url } ) }
-                    render={ ( { open } ) => {
-                        return <button onClick={ open }>
-                            Upload marker || { markerCustom ? markerCustom : 'Geen' }
-                        </button>
-                    }}
-                />
+                { marker === true &&
+                    <>
+                        <TextControl
+                            label={ __('Marker tooltip', 'lazy-map') }
+                            value={ markerTooltip }
+                            onChange={ ( markerTooltip ) => setAttributes( { markerTooltip } ) }
+                        />
+                        <h3 style={{ marginBottom: '0' }}>{ __('Custom marker', 'lazy-map') }</h3>
+                        <small>{ __('Leave empty to use the default marker', 'lazy-map') }</small>
+                        { markerCustom !== 'false' &&
+                            <>
+                                <img style={{ display: 'block' }} src={ markerCustom } />
+                                <Button style={{ display: 'block' }} isDefault onClick={ () => setAttributes({ markerCustom: 'false' }) }>
+                                    { __( 'Reset custom marker', 'lazy-map' ) }
+                                </Button>
+                            </>
+                        }
+                        <MediaUpload
+                            onSelect={ ( value ) => setAttributes( { markerCustom: value.sizes.full.url } ) }
+                            render={ ( { open } ) => {
+                                return <Button isDefault onClick={ open }>
+                                    { __('Choose image', 'lazy-map' ) }
+                                </Button>
+                            }}
+                        />
+                    </>
+                }
                 </PanelBody>
             </InspectorControls>
-            <div style={{ height: '3rem' }}>Lazy map</div>
+            <div>
+                <h3>{ __('Edit Lazy Map options in the sidebar', 'lazy-map') }</h3>
+            </div>
         </div>;
     },
     save({ attributes }) {
