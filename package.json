@@ -1,0 +1,16 @@
+{
+  "name": "lazy-map",
+  "version": "1.0.0",
+  "description": "A gutenberg map block that is lazy loaded for better performance.",
+  "main": "index.js",
+  "scripts": {
+    "start": "wp-scripts start block/src/lazy-map-block.js block/src/lazy-map-public.js --output-path=block/dist",
+    "build": "wp-scripts build block/src/lazy-map-block.js block/src/lazy-map-public.js --output-path=block/dist",
+    "lint:js": "wp-scripts lint-js"
+  },
+  "author": "Laytan Laats",
+  "license": "GPL-2.0+",
+  "devDependencies": {
+    "@wordpress/scripts": "6.2.0"
+  }
+}
