@@ -63,6 +63,8 @@ class Lazy_Map_Block {
 			$asset_file['version']
 		);
 
+		wp_localize_script( 'lazy-map-block', 'assets', array( 'mapPlaceholder' => plugins_url( 'lazy-map/assets/map_placeholder.jpg' ) ) );
+
 		register_block_type(
 			'lazy-map/lazy-map-block',
 			array(

@@ -3,6 +3,7 @@ import { __ } from '@wordpress/i18n';
 import { InspectorControls, MediaUpload } from '@wordpress/editor';
 import { PanelBody, TextControl, ToggleControl, Button, RangeControl, Text } from '@wordpress/components';
 
+
 registerBlockType( 'lazy-map/lazy-map-block', {
     title: __('Lazy map', 'lazy-map'),
     description: __('A map that is lazy loaded for better SEO and performance', 'lazy-map'),
@@ -130,7 +131,10 @@ registerBlockType( 'lazy-map/lazy-map-block', {
                 </PanelBody>
             </InspectorControls>
             <div>
-                <h3>{ __('Edit Lazy Map options in the sidebar', 'lazy-map') }</h3>
+                <p style={{ fontWeight: '700', textTransform: 'uppercase', opacity: '0.8', textAlign: 'center', marginBottom: '0' }}>
+                    { __('Edit Lazy Map options in the sidebar', 'lazy-map') }
+                </p>
+                <img src={ assets.mapPlaceholder } />
             </div>
         </div>;
     },
@@ -146,7 +150,6 @@ registerBlockType( 'lazy-map/lazy-map-block', {
                 data-marker-custom={markerCustom}
                 data-marker-tooltip={markerTooltip} 
                 data-marker-zoom={markerZoom}>
-
         </div>;
     },
 } );
