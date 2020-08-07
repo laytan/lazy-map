@@ -1,5 +1,4 @@
-# Lazy map
-
+=== Lazy map ===
 - Contributors: laytanl
 - Requires at least: 5.0
 - Tested up to: 5.4
@@ -10,7 +9,7 @@
 
 A gutenberg map block that is lazy loaded for better performance.
 
-## Block settings
+== Block settings ==
 
 + API key (string, required)
 + Use marker (checkbox, required)
@@ -20,7 +19,7 @@ A gutenberg map block that is lazy loaded for better performance.
 + Zoom level (number, default: 10)
 + Marker tooltip
 
-## Installation
+== Installation ==
 
 1. Put the lazy-map folder into the plugins directory of your Wordpress installation.
 2. Go to your admin panel and click activate plugin.
@@ -32,15 +31,15 @@ or
 3. Click install plugin
 4. Click activate plugin
 
-## Frequently Asked Questions
+== Frequently Asked Questions ==
 
 No FAQ
 
-## Credits
+== Credits ==
 
 Location Icon made by [Freepik](https://www.flaticon.com/authors/freepik) from [www.flaticon.com](https://www.flaticon.com/)
 
-## Changelog
+== Changelog ==
 
 1.0.0
 Released
